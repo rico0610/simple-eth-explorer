@@ -43,7 +43,7 @@ function App() {
   const fetchNormalTxs = async () => {
     window.web3 = configureWeb3(`https://eth-mainnet.nodereal.io/v3/${process.env.REACT_APP_NODEREAL_AK}`);
 
-    fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -61,7 +61,7 @@ function App() {
   const fetchERC20Txs = async () => {
     window.web3 = configureWeb3(`https://eth-mainnet.nodereal.io/v3/${process.env.REACT_APP_NODEREAL_AK}`);
     
-    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
