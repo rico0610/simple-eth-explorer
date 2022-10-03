@@ -30,7 +30,7 @@ function App() {
         setCardBody(tx);
       } else if (activeTab === '#erc20') { 
 
-        const erc20 = (<Erc20TokenTxn ERC20Txn={ERC20Txn}/>);
+        const erc20 = (<Erc20TokenTxn ERC20={ERC20Txn}/>);
         setCardBody(erc20);
       }
     }, 1000);
@@ -52,6 +52,7 @@ function App() {
     .then(res=>res.json())
     .then(result=>{
 
+      console.log(result.result);
       setTransactions(result.result);
       setStatus(result.status);
       setLoading(false);
@@ -71,6 +72,7 @@ function App() {
     .then(res=>res.json())
     .then(result=>{
 
+      console.log(result.result);
       setERC20Txn(result.result);
     })
     .catch(error=>{

@@ -3,7 +3,7 @@ import {Table} from 'react-bootstrap';
 
 const Erc20TokenTxn = props => {
 
-    const {ERC20Txn} = props
+    const {ERC20} = props;
 
     return(
         
@@ -19,7 +19,7 @@ const Erc20TokenTxn = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {ERC20Txn.map((data, index) => (
+                    {ERC20.map((data, index) => (
                     <tr className='trBody' key={index}>
                         <td><a href={`https://etherscan.io/tx/${data.hash}`} target="_blank" rel="noreferrer">{data.hash}</a></td>
                         <td><a href={`https://etherscan.io/address/${data.from}`} target="_blank" rel="noreferrer">{data.from}</a></td>
