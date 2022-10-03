@@ -44,11 +44,11 @@ function App() {
     window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_AK}`);
   }
 
-  const fetchNormalTxs = async () => {
+  const fetchNormalTxs = () => {
 
     testWeb3();
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -64,11 +64,11 @@ function App() {
     });
   }
 
-  const fetchERC20Txs = async () => {
+  const fetchERC20Txs = () => {
 
     testWeb3();
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -113,7 +113,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchNormalTxs(address) && fetchERC20Txs(address) && setLoading(true)}
+              onClick={()=> fetchNormalTxs() && fetchERC20Txs() && setLoading(true)}
               disabled={address === ''}
               >
               Search
