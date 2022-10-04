@@ -80,24 +80,17 @@ function App() {
 
   const fetchERC20Txs = async () => {
 
-    function timeout(delay) {
-      return new Promise( res => setTimeout(res, delay) );
-    }
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    .then(res=>res.json())
+    .then(result=>{
 
-    await timeout(5000).then(
-    
-      fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
-      .then(res=>res.json())
-      .then(result=>{
+      console.log(result.result);
+      setERC20Txn(result.result);
+    })
+    .catch(error=>{
 
-        console.log(result.result);
-        setERC20Txn(result.result);
-      })
-      .catch(error=>{
-
-        console.log(error);
-      })
-    )
+      console.log(error);
+    })
   }
 
 //-------Loading Condition----------
@@ -132,7 +125,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchNormalTxs() && fetchERC20Txs() && setLoading(true)}
+              onClick={()=> fetchNormalTxs() && setTimeout(fetchERC20Txs, 5000) && setLoading(true)}
               disabled={address === ''}
               >
               Search
