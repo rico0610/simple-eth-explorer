@@ -30,6 +30,8 @@ function App() {
         setCardBody(tx);
       } else if (activeTab === '#erc20') {
 
+        //refreshPage();
+
         const erc20 = (<Erc20TokenTxn ERC20={ERC20Txn}/>);
         setCardBody(erc20);
       }
@@ -45,9 +47,9 @@ function App() {
     console.log(window.web3);
   }
 
-  function timeout(delay) {
-    return new Promise( res => setTimeout(res, delay) );
-  }
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
 
   const fetchNormalTxs = async () => {
 
@@ -71,19 +73,24 @@ function App() {
 
   const fetchERC20Txs = async () => {
 
-    await timeout(5000).then(
-        fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
-        .then(res=>res.json())
-        .then(result=>{
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
+    .then(res=>res.json())
+    .then(result=>{
 
-          console.log(result.result);
-          setERC20Txn(result.result);
-        })
-        .catch(error=>{
+      if (result === 'Max rate limit reached, please use API Key for higher rate limit') {
+        
+        console.log('Shet');
 
-          console.log(error);
-        })
-      )
+      } else {
+
+        console.log(result.result);
+        setERC20Txn(result.result);
+      }
+    })
+    .catch(error=>{
+
+      console.log(error);
+    })
   }
 
 //-------Loading Condition----------
