@@ -41,7 +41,7 @@ function App() {
 //-------Functions----------
 
   const testWeb3 = async () => {
-    window.web3 = await configureWeb3(`https://etherscan.io/${process.env.REACT_APP_ETHERSCAN_AK}`);
+    window.web3 = await configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_AK}`);
     console.log(window.web3);
   }
 
@@ -73,7 +73,7 @@ function App() {
 
     await timeout(3000);
 
-    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
