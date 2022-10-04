@@ -33,7 +33,7 @@ function App() {
         const erc20 = (<Erc20TokenTxn ERC20={ERC20Txn}/>);
         setCardBody(erc20);
       }
-    }, 1000);
+    }, 2000);
 
     return() => clearTimeout(timer);
   });
@@ -44,11 +44,11 @@ function App() {
     window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_AK}`);
   }
 
-  const fetchNormalTxs = () => {
+  const fetchNormalTxs = async () => {
 
     testWeb3();
 
-    fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -64,11 +64,11 @@ function App() {
     });
   }
 
-  const fetchERC20Txs = () => {
+  const fetchERC20Txs = async () => {
 
     testWeb3();
 
-    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
