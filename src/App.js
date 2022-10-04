@@ -41,7 +41,7 @@ function App() {
 //-------Functions----------
 
   const testWeb3 = () => {
-    window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_ETHERSCAN_AK}`);
+    window.web3 = configureWeb3(`https://etherscan.io/${process.env.REACT_APP_ETHERSCAN_AK}`);
   }
 
   const fetchNormalTxs = async () => {
