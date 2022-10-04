@@ -53,7 +53,7 @@ function App() {
 
   const fetchNormalTxs = async () => {
 
-    testWeb3();
+   // testWeb3();
 
     await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
@@ -73,19 +73,12 @@ function App() {
 
   const fetchERC20Txs = async () => {
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
     .then(res=>res.json())
     .then(result=>{
 
-      if (result === 'Max rate limit reached, please use API Key for higher rate limit') {
-        
-        console.log('Shet');
-
-      } else {
-
-        console.log(result.result);
-        setERC20Txn(result.result);
-      }
+      console.log(result.result);
+      setERC20Txn(result.result);
     })
     .catch(error=>{
 
@@ -125,7 +118,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchNormalTxs() && fetchERC20Txs() && setLoading(true)}
+              onClick={()=> testWeb3() && fetchNormalTxs() && fetchERC20Txs() && setLoading(true)}
               disabled={address === ''}
               >
               Search
