@@ -33,7 +33,7 @@ function App() {
         const erc20 = (<Erc20TokenTxn ERC20={ERC20Txn}/>);
         setCardBody(erc20);
       }
-    }, 2000);
+    }, 1500);
 
     return() => clearTimeout(timer);
   });
@@ -46,9 +46,9 @@ function App() {
 
   testWeb3();
 
-  const fetchNormalTxs = async () => {
+  const fetchNormalTxs = () => {
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -64,9 +64,9 @@ function App() {
     });
   }
 
-  const fetchERC20Txs = async () => {
+  const fetchERC20Txs = () => {
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
+    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
