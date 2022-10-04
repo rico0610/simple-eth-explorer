@@ -125,7 +125,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchNormalTxs() && setTimeout(fetchERC20Txs, 5000) && setLoading(true)}
+              onClick={()=> fetchNormalTxs().then(setLoading(true)).then(setTimeout(fetchERC20Txs, 5000))}
               disabled={address === ''}
               >
               Search
