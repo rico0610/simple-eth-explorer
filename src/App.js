@@ -71,7 +71,7 @@ function App() {
 
   const fetchERC20Txs = async () => {
 
-    await timeout(1500);
+    await timeout(3000);
 
     fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
