@@ -71,19 +71,19 @@ function App() {
 
   const fetchERC20Txs = async () => {
 
-    await timeout(3000);
+    await timeout(5000).then(
+        fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
+        .then(res=>res.json())
+        .then(result=>{
 
-    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.RREACT_APP_ETHERSCAN_AK}`)
-    .then(res=>res.json())
-    .then(result=>{
+          console.log(result.result);
+          setERC20Txn(result.result);
+        })
+        .catch(error=>{
 
-      console.log(result.result);
-      setERC20Txn(result.result);
-    })
-    .catch(error=>{
-
-      console.log(error);
-    });
+          console.log(error);
+        })
+      )
   }
 
 //-------Loading Condition----------
