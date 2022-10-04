@@ -33,7 +33,7 @@ function App() {
         const erc20 = (<Erc20TokenTxn ERC20={ERC20Txn}/>);
         setCardBody(erc20);
       }
-    }, 2000);
+    }, 5000);
 
     return() => clearTimeout(timer);
   });
