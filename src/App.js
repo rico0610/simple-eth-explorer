@@ -41,14 +41,14 @@ function App() {
 //-------Functions----------
 
   const testWeb3 = () => {
-    window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_AK}`);
+    window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_ETHERSCAN_AK}`);
   }
 
   const fetchNormalTxs = async () => {
 
     testWeb3();
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_INFURA_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -68,7 +68,7 @@ function App() {
 
     testWeb3();
 
-    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_INFURA_AK}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_AK}`)
     .then(res=>res.json())
     .then(result=>{
 
