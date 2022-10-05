@@ -125,7 +125,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchERC20Txs() && setTimeout(fetchNormalTxs, 5000) && setLoading(true)}
+              onClick={()=> fetchERC20Txs() && setTimeout(fetchNormalTxs, 1500) && setLoading(true)}
               disabled={address === ''}
               >
               Search
