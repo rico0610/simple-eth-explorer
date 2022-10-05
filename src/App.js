@@ -55,14 +55,14 @@ function App() {
   //   return new Promise( res => setTimeout(res, delay) );
   // }
 
-  const fetchNormalTxs = () => {
+  const fetchNormalTxs = async () => {
 
    // testWeb3();
 
     window.web3 = configureWeb3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_AK}`);
     console.log(window.web3);
 
-    fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
+    await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort="desc"&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -76,8 +76,11 @@ function App() {
 
       console.log(error);
     });
+  }
 
-    fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
+  const fetchERC20Txs = async () => {
+
+    await fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
     .then(res=>res.json())
     .then(result=>{
 
@@ -87,23 +90,8 @@ function App() {
     .catch(error=>{
 
       console.log(error);
-    });
+    })
   }
-
-  // const fetchERC20Txs = () => {
-
-  //   fetch(`https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=1&offset=100&sort=asc&apikey=${process.env.REACT_APP_ETHERSCAN_AK2}`)
-  //   .then(res=>res.json())
-  //   .then(result=>{
-
-  //     console.log(result.result);
-  //     setERC20Txn(result.result);
-  //   })
-  //   .catch(error=>{
-
-  //     console.log(error);
-  //   })
-  // }
 
 //-------Loading Condition----------
   if (loading) return (
@@ -137,7 +125,7 @@ function App() {
             />
             <Button 
               className="button" 
-              onClick={()=> fetchNormalTxs() && setLoading(true)}
+              onClick={()=> fetchERC20Txs() && setTimeout(fetchNormalTxs, 5000) && setLoading(true)}
               disabled={address === ''}
               >
               Search
