@@ -24,7 +24,11 @@ const Erc20TokenTxn = props => {
                         <td><a href={`https://etherscan.io/tx/${data.hash}`} target="_blank" rel="noreferrer">{data.hash}</a></td>
                         <td><a href={`https://etherscan.io/address/${data.from}`} target="_blank" rel="noreferrer">{data.from}</a></td>
                         <td><a href={`https://etherscan.io/address/${data.to}`} target="_blank" rel="noreferrer">{data.to}</a></td>
+                        {data.tokenDecimal === "6" ?
+                        <td>{window.web3.utils.fromWei(data.value, "picoether")}</td>
+                        :
                         <td>{window.web3.utils.fromWei(data.value, "ether")}</td>
+                        }
                         <td>{data.tokenSymbol}</td>
                     </tr>
                     ))}
